@@ -74,7 +74,7 @@ const App = () => {
             </ProtectedComponent>
           }
         />
-        <Route path="/favorite" element={<Favorite/>} />
+        <Route path="/favorite" element={<Favorite handleToDetail={handleToDetail}/>} />
       </Routes>
     </>
   );

@@ -4,7 +4,7 @@ import { auth, db } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {MdDeleteForever} from 'react-icons/md'
 
-const FavoritePokemon = () => {
+const FavoritePokemon = ({handleToDetail}) => {
   const [pokemonDb, setPokemonDb] = useState([]);
   const [user] = useAuthState(auth);
   const dbPokemonUser = doc(db, "user", `${user.email}`);
@@ -31,7 +31,7 @@ const FavoritePokemon = () => {
     <>
       {pokemonDb.map((item, index) => {
         return (
-            <div key={index}  className="w-[15%] mx-3">
+            <div onClick={() => handleToDetail(item.id)} key={index}  className="w-[15%] mx-3">
               <div className="relative  break-words bg-gray-100 w-full mb-6 shadow-lg rounded mt-10 py-6">
                 <div className="flex gap-2 justify-between">
                   <div className="relative">
