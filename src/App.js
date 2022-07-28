@@ -14,28 +14,41 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const getPokemonData = async (id) => {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    return res.data;
-  };
-
   useEffect(() => {
     const getPokemonList = async () => {
-      let pokemonArray = [];
-      for (let i = 1; i <= 150; i++) {
-        pokemonArray.push(await getPokemonData(i));
+      let pokemonArray = []
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon')
+      for (let i = 1; i < response.data.results.length +1; i++) {
+        pokemonArray.push(await (await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)).data)
       }
       setPokemon(pokemonArray);
-      setLoading(false);
-    };
-    getPokemonList();
-  }, []);
+      setLoading(false)
+    }
+    getPokemonList()
+  },[])
+  // console.log(pokemon);
+  // const getPokemonData = async (id) => {
+  //   const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  //   return res.data;
+  // };
 
+  // useEffect(() => {
+  //   const getPokemonList = async () => {
+  //     let pokemonArray = [];
+  //     for (let i = 1; i <= 150; i++) {
+  //       pokemonArray.push(await getPokemonData(i));
+  //     }
+  //     setPokemon(pokemonArray);
+  //     setLoading(false);
+  //   };
+  //   getPokemonList();
+  // }, []);
+
+  console.log(pokemon);
   const handleToDetail = (id) => {
     navigate(`/detail/${id}`);
   };
   
-
   return (
     <>
       <Navbar />

@@ -8,9 +8,8 @@ const CardPokemon = ({ data, handleToDetail }) => {
   const [user] = useAuthState(auth);
   const [favorite, setFavorite] = useState(false);
 
-  const dbPokemonUser = doc(db, 'user', user.email)
-
   const onFavorite = async () => {
+    const dbPokemonUser = doc(db, 'user', user.email)
     if(user.email) {
       setFavorite(true);
       await updateDoc(dbPokemonUser, {
