@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import pikachu from "../assets/pikachu.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import pikachu from "../assets/pikachu.png";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth,db } from "../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
-  const [credential, setCredential] = useState({ email: "", password: "" });
+  const [credential, setCredential] = useState({ email:"", password:"", userName:"" });
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
+
+  const inputUserNameChange = (event) => {
+    setCredential({ ...credential, userName: event.target.value });
+  };
 
   const inputEmailChange = (event) => {
     setCredential({ ...credential, email: event.target.value });
@@ -24,7 +28,12 @@ const Register = () => {
     event.preventDefault();
     await createUserWithEmailAndPassword(credential.email, credential.password);
     await setDoc(doc(db, 'user', credential.email), {
-      savedPokemon : []
+      savedPokemon : [],
+      profile : {
+        userName : credential.userName,
+        email : credential.email,
+        avatar : ''
+      }
     });
   };
 
@@ -44,13 +53,16 @@ const Register = () => {
               <img src={pikachu} className="w-full" alt="Phone" />
             </div>
             <div className="md:w-8/12 lg:w-5/12 lg:ml-20 border-2 p-5 shadow-lg rounded">
-              <h1 classNameName="text-3xl font-bold mb-6">Register</h1>
+              <h1 className="text-3xl font-bold mb-6">Register</h1>
               <form onSubmit={submitHandler}>
                 <div className="mb-6">
                   <input
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="User Name"
+                    required
+                    onChange={inputUserNameChange}
+                    value={credential.userName}
                   />
                 </div>
                 <div className="mb-6">
@@ -58,6 +70,7 @@ const Register = () => {
                     type="text"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Email address"
+                    required
                     onChange={inputEmailChange}
                     value={credential.email}
                   />
@@ -68,6 +81,7 @@ const Register = () => {
                     type="password"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Password"
+                    required
                     onChange={inputPasswordChange}
                     value={credential.password}
                   />
@@ -87,39 +101,19 @@ const Register = () => {
                   <p className="text-center font-semibold mx-4 mb-0">OR</p>
                 </div>
 
-                <a
-                  className="px-7 py-3 bg-[#3b5998] text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-                  href="#!"
-                  role="button"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="light"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 320 512"
-                    className="w-3.5 h-3.5 mr-2"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-                    />
-                  </svg>
-                  Continue with Facebook
-                </a>
                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                   <p className="text-center font-semibold mx-4 mb-0">
                     I have Account?
                   </p>
                 </div>
-                <a
+                <Link to='/login'
                   className="px-7 py-3 bg-[#8b9ec5] text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3"
-                  href="#!"
                   role="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
                   Login
-                </a>
+                </Link>
               </form>
             </div>
           </div>
