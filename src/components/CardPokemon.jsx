@@ -27,7 +27,7 @@ const CardPokemon = ({ data, handleToDetail }) => {
 
   return (
     <>
-      <div className="relative  break-words bg-gray-100 w-full mb-6 shadow-lg rounded mt-10 py-6">
+      <div className="relative break-words bg-gray-100 w-full shadow-lg rounded mt-7 md:ml-6 py-6">
         <div className=" bg-yellow-400 w-full opacity-0 hover:opacity-90 z-10 h-full absolute rounded top-0 flex flex-col justify-between">
           <div onClick={() => onFavorite()} className="flex items-center">
             {favorite ? (
@@ -59,7 +59,7 @@ const CardPokemon = ({ data, handleToDetail }) => {
           <div className="relative">
             <img
               src={data.sprites.front_default}
-              className=" mx-24 absolute z-10 -top-5 left-5 max-w-[250px]"
+              className=" mx-24 absolute z-10 -top-5 left-1 max-w-[450px]"
               alt={data.name}
             />
             <h3 className="text-sm text-slate-400 text-start mt-8 mx-6 font-bold leading-normal">

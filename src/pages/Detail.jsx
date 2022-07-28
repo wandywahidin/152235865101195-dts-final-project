@@ -45,8 +45,8 @@ const Detail = () => {
         <Loading/>
       ) : (
         <>
-          <div className="flex flex-col w-[80%] mx-auto mt-16 p-6 border shadow-xl">
-            <div className="flex gap-6 ">
+          <div className="flex flex-col md:w-[80%] w-[90%] mx-auto my-16 p-6 border shadow-xl">
+            <div className="flex md:flex-row flex-col gap-6 ">
               <div className=" bg-gray-300 rounded">
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
@@ -84,7 +84,7 @@ const Detail = () => {
                     })}
                   </h1>
                 </div>
-                <div className="text-l p-2 gap-2 bg-gray-300 font-bold flex mx-4 mt-2 mb-4 rounded">
+                <div className="text-l p-2 gap-2 bg-gray-300 font-bold flex flex-wrap mx-4 mt-2 mb-4 rounded">
                   <h1>Ability : </h1>
                   {detail.abilities.map((item, index) => {
                     return <div key={index}>{item.ability.name},</div>;
@@ -92,7 +92,7 @@ const Detail = () => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-3 text-gray-700 justify-between text-center mt-4 items-center gap-8">
+            <div className="grid md:grid-cols-3 md:text-lg grid-cols-2 break-words text-sm text-gray-700 justify-between text-center mt-4 items-center gap-8">
               {detail.stats.map((item, index) => {
                 return (
                   <div className=" w-full" key={index}>

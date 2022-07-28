@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import pikachu from "../assets/pikachu.png";
+import pink from "../assets/pink.png";
+import snorlax from "../assets/snorlax.png";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth,db } from "../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
-  const [credential, setCredential] = useState({ email:"", password:"", userName:"" });
+  const [credential, setCredential] = useState({ email:"", password:"", userName:"", avatar: 25 });
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
+
+  const inputAvatar = (event) => {
+    setCredential({...credential, avatar: event.target.value})
+  }
 
   const inputUserNameChange = (event) => {
     setCredential({ ...credential, userName: event.target.value });
@@ -32,7 +38,7 @@ const Register = () => {
       profile : {
         userName : credential.userName,
         email : credential.email,
-        avatar : ''
+        avatar : credential.avatar
       }
     });
   };
@@ -85,6 +91,21 @@ const Register = () => {
                     onChange={inputPasswordChange}
                     value={credential.password}
                   />
+                  <div className="mt-2 mx-1 font-bold">Choose Your Avatar</div>
+                  <div className="flex justify-center gap-6 mt-2">
+                    <label htmlFor="pikachu" className="flex flex-col items-center cursor-pointer">
+                        <img src={pikachu} alt="pikachu" className="w-28 h-28" />
+                        <input name="avatar" type="radio" value={'25'} onChange={inputAvatar} id="pikachu"/>
+                    </label>
+                    <label htmlFor="pink" className="flex flex-col items-center">
+                        <img src={pink} alt="pink" className="w-28 h-28" />
+                        <input name="avatar" type="radio" value={'39'} onChange={inputAvatar} id="pink"/>
+                    </label>
+                    <label htmlFor="snorlax" className="flex flex-col items-center">
+                        <img src={snorlax} alt="snorlax" className="w-28 h-28" />
+                        <input name="avatar" type="radio" value={'143'} onChange={inputAvatar} id="snorlax"/>
+                    </label>
+                  </div>
                   <p>{error? error.message : null}</p>
                 </div>
 
