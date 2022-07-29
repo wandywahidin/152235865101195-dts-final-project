@@ -16,7 +16,7 @@ const Home2 = ({pokemon, loading, handleToDetail}) => {
         <img src={pokeball} alt="pokeball" className=" absolute bottom-0 right-1" />
       </div>
     </div>
-    <div className="grid grid-cols-2 md:grid-cols-5 mx-2 my-4 px-1">
+    <div className="grid grid-cols-2 min-h-[75vh] md:grid-cols-5 mx-2 my-4 px-1">
       {
         pokemon.filter((search) => search.name.toLowerCase().includes(query)).map((item, index) => (
           <div className=" md:w-[70%] md:mx-3 mx-1 mt-4 md:mt-7" key={index}>
