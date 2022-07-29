@@ -8,6 +8,7 @@ import Home2 from "./pages/Home2";
 import ProtectedComponent from "./components/ProtectedComponent";
 import Detail from "./pages/Detail";
 import Favorite from "./pages/Favorite";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -34,7 +35,6 @@ const App = () => {
   const handleToDetail = (id) => {
     navigate(`/detail/${id}`);
   };
-  
 
   return (
     <>
@@ -74,8 +74,16 @@ const App = () => {
             </ProtectedComponent>
           }
         />
-        <Route path="/favorite" element={<Favorite handleToDetail={handleToDetail}/>} />
+        <Route
+          path="/favorite"
+          element={
+            <ProtectedComponent>
+              <Favorite handleToDetail={handleToDetail} />
+            </ProtectedComponent>
+          }
+        />
       </Routes>
+      <Footer />
     </>
   );
 };

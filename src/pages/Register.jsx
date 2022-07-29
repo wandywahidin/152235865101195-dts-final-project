@@ -52,13 +52,13 @@ const Register = () => {
 
   return (
     <>
-      <section className="h-[90vh]">
+      <section className="md:h-[100vh]">
         <div className="container px-6 py-4 h-full">
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
             <div className="md:w-8/12 lg:w-5/12 mb-12 md:mb-0">
               <img src={pikachu} className="w-full" alt="Phone" />
             </div>
-            <div className="md:w-8/12 lg:w-5/12 lg:ml-20 border-2 p-5 shadow-lg rounded">
+            <div className="md:w-8/12 lg:w-5/12 lg:ml-20 border-2 p-5 relative shadow-lg rounded">
               <h1 className="text-3xl font-bold mb-6">Register</h1>
               <form onSubmit={submitHandler}>
                 <div className="mb-6">
@@ -117,10 +117,6 @@ const Register = () => {
                 >
                  {loading ? 'Loading...' : 'Register'}
                 </button>
-
-                <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                  <p className="text-center font-semibold mx-4 mb-0">OR</p>
-                </div>
 
                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                   <p className="text-center font-semibold mx-4 mb-0">

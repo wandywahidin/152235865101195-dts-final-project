@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import {useAuthState} from 'react-firebase-hooks/auth'
@@ -7,6 +8,7 @@ import { auth, db } from "../config/firebase";
 const CardPokemon = ({ data, handleToDetail }) => {
   const [user] = useAuthState(auth);
   const [favorite, setFavorite] = useState(false);
+  const navigate = useNavigate()
 
 
   const onFavorite = async () => {
@@ -21,7 +23,7 @@ const CardPokemon = ({ data, handleToDetail }) => {
         })
       })
     } else {
-      <div>Please login to saved a pokemon</div>
+      navigate('/login')
     }
   };
 
