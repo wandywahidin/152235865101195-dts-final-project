@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyADLVTP8mQyayDxArzFDK7U3vawegR_APA",
-  authDomain: "pokefake-5a17c.firebaseapp.com",
-  projectId: "pokefake-5a17c",
-  storageBucket: "pokefake-5a17c.appspot.com",
-  messagingSenderId: "380965166014",
-  appId: "1:380965166014:web:82b57c1338af50f0f037ef"
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MS_SENDER,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
